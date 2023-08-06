@@ -12,7 +12,7 @@ export function validateSchema(schema) {
 
     if (error) {
       const errorMessage = error.details.map((detail) => detail.message).join(" ");
-      return res.status(400).send(errorMessage);
+      return res.status(422).send(errorMessage);
     }
 
     next();
