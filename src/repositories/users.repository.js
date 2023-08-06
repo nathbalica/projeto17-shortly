@@ -43,8 +43,8 @@ export function rankingUsersDB(){
         SELECT
             u.id AS id,
             u.name AS name,
-            COALESCE(SUM(ur."visitCount"), 0) AS linksCount,
-            COALESCE(SUM(ur."visitCount"), 0) AS visitCount
+            COALESCE(SUM(ur."visitCount"), 0) AS "linksCount",
+            COALESCE(SUM(ur."visitCount"), 0) AS "visitCount"
         FROM
             users u
         LEFT JOIN urls ur ON u.id = ur."userId"
