@@ -19,7 +19,7 @@ export function userDataDB(userId){
         SELECT
             u.id AS id,
             u.name AS name,
-            SUM(ur."visitCount") AS visitCount,
+            SUM(ur."visitCount") AS "visitCount",
             JSON_AGG(
                 JSON_BUILD_OBJECT(
                 'id', ur.id,
