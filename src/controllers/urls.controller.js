@@ -55,18 +55,14 @@ export async function getUrlByShortUrl(req, res) {
 
 export async function deleteUrl(req, res) {
     const { id } = req.params;
-    const { userId } = res.locals.userId;
+    const { userId } = res.locals;
 
     try {
-        const userUrl = getUserUrlDB(id)
-        const { rows } = await deleteUrlDB(id);
+        const userUrl = await getUserUrlDB(id)
 
-        if (rows.length === 0) {
-            return res.status(404).send({ message: "URL not found" });
-        }
-        const url = userUrl.rows[0];
+        if (userUrl.rowCount === 0) return res.status(404).send({ message: "URL não existe!" })
 
-        if (url.userId !== userId) {
+        if (userUrl.rows[0].userId !== userId) {
             return res.status(401).send({ message: "Unauthorized: This URL does not belong to the user" });
         }
 
